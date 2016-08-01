@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/opentip/2.4.6/downloads/opentip-native.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/opentip/2.4.6/css/opentip.css" rel="stylesheet" type="text/css" />
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    
+    <script type="text/javascript">
+    
+    var dataset = [[4,2,'Bob'], [5,7,'Sally'], [2,2,'Marvin']];
+    var width = 38;
+    var height = 38;
+    var margin = 20;
+           
+    function giveX(d) { return d[0] * width + margin }
+	function giveY(d) { return d[1] * height + margin }
+
+    var mapdiv = d3.select("#map")
+    	.append("svg")
+    	.attr("height", 680)
+    	.attr("width", 980)
+    	.style('border', '1px solid black')
+    	  	
+    var pips = mapdiv.selectAll('circle')
+    	.data(dataset)
+    	.enter().append('circle')
+    		.attr('cx', function(d) {return giveX(d)})
+    		.attr('cy', function(d) {return giveY(d)})
+    		.attr('r', width/2)
+    		.style('fill', "red")
+    		.style('stroke', "black")
+    		.each(function(d,i){
+    				new Opentip(this).setContent(d[2]);
+    		})
+
+    		
+
+    </script>   
+</body>
+</html>
